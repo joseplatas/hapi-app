@@ -28,10 +28,25 @@ server.route({
   }
 });
 
+//serving static files using inert
+server.route({
+  method: 'GET',
+  path: '/hello',
+  handler: (request, h) => {
+    return(
+      h.file('./public/hello.html')
+    )
+  }
+});
 
 
 //init server
 const init = async () =>{
+
+  //requiring a plugin
+  await server.register(require('inert'));
+
+
   try {
       await server.start();
   }

@@ -7,6 +7,29 @@ const server = Hapi.server({
   host:"localhost",
 });
 
+
+// adding a route
+server.route({
+  method: "GET",
+  path: "/",
+  handler: (request, h)=>{
+    return ('Hello Hapi');
+  }
+});
+
+//dynamic route, depends on url key
+server.route({
+  method: "GET",
+  path: '/{name}',
+  handler: (request, h) =>{
+    return(
+      'Hello, ' + encodeURIComponent(request.params.name) + "!"
+    )
+  }
+});
+
+
+
 //init server
 const init = async () =>{
   try {

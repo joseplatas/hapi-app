@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "hapi": "^17.3.1",
+    "hapi-pino": "^4.0.4",
     "inert": "^5.1.0"
   }
 }

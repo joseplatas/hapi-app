@@ -21,7 +21,9 @@ server.route({
 server.route({
   method: "GET",
   path: '/{name}',
-  handler: (request, h) =>{
+  handler: (request, h) =>{ 
+    //saving logs
+    request.logger.info('In handler %s',request.path);
     return(
       'Hello, ' + encodeURIComponent(request.params.name) + "!"
     )
@@ -45,6 +47,13 @@ const init = async () =>{
 
   //requiring a plugin
   await server.register(require('inert'));
+  await server.register({
+    plugin: require('hapi-pino'),
+    options: {
+        prettyPrint: true,
+        logEvents: ['response']
+    }
+});
 
 
   try {
